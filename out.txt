@@ -1,0 +1,71 @@
+﻿uv : USER_AGENT environment 
+variable not set, consider 
+setting it to identify your 
+requests.
+En línea: 1 Carácter: 1
++ uv run main.py "What is agent 
+memory?" 2>&1 | Out-File 
+-Encoding utf8 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~
+    + CategoryInfo          : N 
+   otSpecified: (USER_AGENT en  
+  vi... your requests.:String   
+ ) [], RemoteException
+    + FullyQualifiedErrorId : N 
+   ativeCommandError
+ 
+
+Loading weights:   0%|          
+| 0/103 [00:00<?, ?it/s]
+Loading weights: 
+100%|##########| 103/103 
+[00:00<00:00, 3299.63it/s]
+[1mBertModel LOAD REPORT[0m 
+from: sentence-transformers/all-
+MiniLM-L6-v2
+Key                     | 
+Status     |  | 
+------------------------+-------
+-----+--+-
+embeddings.position_ids | 
+UNEXPECTED |  | 
+
+[3mNotes:
+- UNEXPECTED[3m	:can be 
+ignored when loading from 
+different task/architecture; 
+not ok if you expect identical 
+arch.[0m
+  [Pinecone] Index 'psyco-oncology-rag' has 187 vectors. Skipping upload.
+
+============================================================
+  LANGGRAPH RAG AGENT
+  Question: What is agent memory?
+============================================================
+  [Router] Deciding data source...
+  [Router] -> Vectorstore (RAG)
+  [Retrieve] Searching vectorstore for relevant documents...
+  [Retrieve] Found 4 document(s).
+  [+] Node completed: retrieve
+  [Grader] Checking document relevance...
+    Doc 1: Relevant
+    Doc 2: Relevant
+    Doc 3: Relevant
+    Doc 4: Relevant
+  [Grader] 4/4 documents passed.
+  [Decision] Documents are sufficient -> Generate
+  [+] Node completed: grade_documents
+  [Generate] Generating answer from context...
+  [Hallucination Check] Verifying answer is grounded in facts...
+  [Hallucination Check] Answer is grounded. Checking usefulness...
+  [Answer Check] Answer is useful!
+  [+] Node completed: generate
+
+------------------------------------------------------------
+  FINAL ANSWER
+------------------------------------------------------------
+
+  Agent memory refers to the ability of an agent to retain and recall information over time. It can be categorized into two types: short-term memory, which utilizes in-context learning, and long-term memory, which provides the capability to retain and recall information over extended periods using an external vector store. This memory mechanism enables agents to behave conditioned on past experience and interact with other agents.
+
+============================================================
