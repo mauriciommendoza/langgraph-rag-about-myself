@@ -111,11 +111,23 @@ def web_search(state: GraphState) -> Dict[str, Any]:
     documents = state.get("documents", [])  
     
     docs = web_search_tool.invoke({"query": question})
-    web_results = "\\n".join([d["content"] for d in docs])
+    
+    # TavilySearch returns a dict: {"query": ..., "results": [{"content": ..., "url": ...}, ...]}
+    if isinstance(docs, dict):
+        results_list = docs.get("results", [])
+        web_results = "\n".join([r.get("content", "") for r in results_list])
+        result_count = len(results_list)
+    elif isinstance(docs, list):
+        web_results = "\n".join([d.get("content", str(d)) if isinstance(d, dict) else str(d) for d in docs])
+        result_count = len(docs)
+    else:
+        web_results = str(docs)
+        result_count = 1
+    
     web_doc = Document(page_content=web_results)
     
     documents.append(web_doc)
-    print(f"  [Web Search] Added {len(docs)} web result(s).")
+    print(f"  [Web Search] Added {result_count} web result(s).")
     return {
         "documents": documents,
         "question": question,
