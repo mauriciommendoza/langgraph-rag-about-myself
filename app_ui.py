@@ -32,12 +32,12 @@ async def on_chat_start():
     """Called when a new chat session starts. Sends a welcome message."""
     await cl.Message(
         content=(
-            "Welcome to the **LangGraph RAG Agent**!\n\n"
+            "Welcome to my **Personal AI Assistant**!\n\n"
             "Ask me anything about:\n"
-            "- LLM Agents & Memory\n"
-            "- Prompt Engineering\n"
-            "- Adversarial Attacks on LLMs\n\n"
-            "I'll search my knowledge base and the web to find the best answer."
+            "- My background and experience\n"
+            "- My projects and skills\n"
+            "- Anything else you'd like to know about me!\n\n"
+            "I'll search my knowledge base to find the best answer."
         )
     ).send()
 
@@ -63,15 +63,9 @@ async def on_message(message: cl.Message):
 
             elif node_name == "grade_documents":
                 docs = node_output.get("documents", [])
-                web_search = node_output.get("web_search", "No")
                 step.output = (
-                    f"{len(docs)} document(s) passed relevance check.\n"
-                    f"Web search needed: {web_search}"
+                    f"{len(docs)} document(s) passed relevance check."
                 )
-
-            elif node_name == "websearch":
-                docs = node_output.get("documents", [])
-                step.output = f"Web search completed. Total documents now: {len(docs)}"
 
             elif node_name == "generate":
                 step.output = "Answer generated successfully."

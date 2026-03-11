@@ -1,13 +1,8 @@
-# Welcome to Chainlit! 🚀🤖
+# Welcome to My Personal AI Chatbot! 
 
-Hi there, Developer! 👋 We're excited to have you on board. Chainlit is a powerful tool designed to help you prototype, debug and share applications built on top of LLMs.
+Hi there! 👋 This is an interactive chatbot designed to answer questions about me. I've built this using LangGraph, Pinecone, and Chainlit!
 
-## Useful Links 🔗
-
-- **Documentation:** Get started with our comprehensive [Chainlit Documentation](https://docs.chainlit.io) 📚
-- **Discord Community:** Join our friendly [Chainlit Discord](https://discord.gg/k73SQ3FyUh) to ask questions, share your projects, and connect with other developers! 💬
-
-We can't wait to see what you create with Chainlit! Happy coding! 💻😊
+Feel free to ask me anything about my background, projects, or interests. 
 
 ## Welcome screen
 

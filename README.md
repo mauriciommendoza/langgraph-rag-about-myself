@@ -77,7 +77,7 @@ All of this happens in a **graph-based workflow** where each step is a node, and
 ## Project Structure
 
 ```
-Langgraph-rag-psyco-oncology-chat/
+langgraph-rag-about-myself/
 │
 ├── main.py                          # Entry point — run this to use the agent
 ├── .env                             # API keys (not committed to git)
@@ -185,8 +185,8 @@ A lightweight CLI wrapper. It accepts a question as a command-line argument, str
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/Langgraph-rag-psyco-oncology-chat.git
-cd Langgraph-rag-psyco-oncology-chat
+git clone https://github.com/your-username/langgraph-rag-about-myself.git
+cd langgraph-rag-about-myself
 ```
 
 ### Step 2: Install Dependencies
@@ -205,7 +205,7 @@ Create a `.env` file in the project root (or edit the existing one) with your AP
 GROQ_API_KEY="your_groq_api_key_here"
 HF_TOKEN="your_huggingface_token_here"
 PINECONE_API_KEY="your_pinecone_api_key_here"
-PINECONE_INDEX_NAME="psyco-oncology-rag"
+PINECONE_INDEX_NAME="about-myself-rag"
 TAVILY_API_KEY="your_tavily_api_key_here"
 USER_AGENT="LangGraph-Agent"
 ```
@@ -215,7 +215,7 @@ USER_AGENT="LangGraph-Agent"
 | `GROQ_API_KEY`       | [Groq Console](https://console.groq.com/keys)       |
 | `HF_TOKEN`           | [HuggingFace Settings](https://huggingface.co/settings/tokens) |
 | `PINECONE_API_KEY`   | [Pinecone Console](https://app.pinecone.io)          |
-| `PINECONE_INDEX_NAME`| Name you choose for your index (e.g. `psyco-oncology-rag`) |
+| `PINECONE_INDEX_NAME`| Name you choose for your index (e.g. `about-myself-rag`) |
 | `TAVILY_API_KEY`     | [Tavily Dashboard](https://app.tavily.com)           |
 
 > **Note:** The Pinecone index is created automatically on the first run if it doesn't exist. You don't need to create it manually.
@@ -234,60 +234,7 @@ uv run main.py "Explain prompt engineering techniques"
 uv run main.py "How to perform an adversarial attack on LLM?"
 ```
 
-If no question is provided, it defaults to: *"What is agent memory?"*
-
----
-
-## Example Output
-
-```
-============================================================
-  LANGGRAPH RAG AGENT
-  Question: What is agent memory?
-============================================================
-  [Pinecone] Index 'psyco-oncology-rag' has 187 vectors. Skipping upload.
-  [Router] Deciding data source...
-  [Router] -> Vectorstore (RAG)
-  [Retrieve] Searching vectorstore for relevant documents...
-  [Retrieve] Found 4 document(s).
-  [+] Node completed: retrieve
-  [Grader] Checking document relevance...
-    Doc 1: Relevant
-    Doc 2: Relevant
-    Doc 3: Relevant
-    Doc 4: Relevant
-  [Grader] 4/4 documents passed.
-  [Decision] Documents are sufficient -> Generate
-  [+] Node completed: grade_documents
-  [Generate] Generating answer from context...
-  [Hallucination Check] Verifying answer is grounded in facts...
-  [Hallucination Check] Answer is grounded. Checking usefulness...
-  [Answer Check] Answer is useful!
-  [+] Node completed: generate
-
-------------------------------------------------------------
-  FINAL ANSWER
-------------------------------------------------------------
-
-  Agent memory refers to the ability of an agent to retain and
-  recall information over time...
-
-============================================================
-```
-
----
-
-## Knowledge Base
-
-The agent's knowledge base is built from these source articles (configurable in `src/config/settings.py`):
-
-| Article                              | Topic                        |
-|--------------------------------------|------------------------------|
-| [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/) | Agent architectures & memory |
-| [Prompt Engineering](https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/) | Prompt techniques            |
-| [Adversarial Attacks on LLMs](https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/) | LLM security                 |
-
-To add new sources, simply append URLs to the `URLS_TO_LOAD` list in `settings.py` and delete your Pinecone index (it will be recreated automatically on the next run).
+If no question is provided, it defaults to: *"Give me a Resume about Miguel?"*
 
 ---
 
