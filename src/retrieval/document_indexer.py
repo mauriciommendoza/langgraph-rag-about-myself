@@ -6,12 +6,12 @@ Handles downloading, chunking, embedding, and vectorizing documents from URLs.
 import os
 from typing import List
 from langchain_core.documents import Document
-from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import WebBaseLoader, PyPDFDirectoryLoader
 from langchain_pinecone import PineconeVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from src.config.settings import URLS_TO_LOAD, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL
+from src.config.settings import URLS_TO_LOAD, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL, PDF_DIR
 from dotenv import load_dotenv
 from pinecone import Pinecone, ServerlessSpec
 
@@ -22,29 +22,49 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (compatible; LangGraph-RAG-Agent/1.0; +h
 
 class DocumentIndexer:
     """
-    A class responsible for fetching documents from URLs, splitting them into chunks, 
-    and storing them in a Pinecone vector store.
+    A class responsible for fetching documents from URLs and local PDFs, 
+    splitting them into chunks, and storing them in a Pinecone vector store.
     """
     
-    def __init__(self, urls: List[str], chunk_size: int, chunk_overlap: int, embedding_model: str):
+    def __init__(self, urls: List[str], pdf_dir: str, chunk_size: int, chunk_overlap: int, embedding_model: str):
         """
-        Initializes the indexer with URLs and embedding settings.
+        Initializes the indexer with URLs, PDF directory, and embedding settings.
         
         Args:
             urls (List[str]): URLs to scrape.
+            pdf_dir (str): Path to directory containing PDF files.
             chunk_size (int): Max characters for each document chunk.
             chunk_overlap (int): Number of overlapping characters between chunks.
             embedding_model (str): HuggingFace embedding model ID.
         """
         self.urls = urls
+        self.pdf_dir = pdf_dir
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.embedding_model = embedding_model
         
     def _load_documents(self) -> List[Document]:
-        """Loads documents from the provided URLs."""
-        docs = [WebBaseLoader(url).load() for url in self.urls]
-        return [item for sublist in docs for item in sublist]
+        """Loads documents from both the provided URLs and local PDFs."""
+        all_docs = []
+        
+        # Load from URLs
+        if self.urls:
+            print("  [Indexer] Loading documents from URLs...")
+            url_docs = [WebBaseLoader(url).load() for url in self.urls]
+            all_docs.extend([item for sublist in url_docs for item in sublist])
+            
+        # Load from PDFs
+        if os.path.exists(self.pdf_dir):
+            print(f"  [Indexer] Scanning '{self.pdf_dir}' for PDF files...")
+            pdf_loader = PyPDFDirectoryLoader(self.pdf_dir)
+            pdf_docs = pdf_loader.load()
+            if pdf_docs:
+                print(f"  [Indexer] Loaded {len(pdf_docs)} total pages from PDFs.")
+                all_docs.extend(pdf_docs)
+            else:
+                print("  [Indexer] No PDFs found in the directory.")
+                
+        return all_docs
 
     def _split_documents(self, docs: List[Document]) -> List[Document]:
         """Splits the loaded documents into smaller chunks using a text splitter."""
@@ -67,7 +87,7 @@ class DocumentIndexer:
         Returns:
             VectorStoreRetriever: A retriever instance connected to the Pinecone vector database.
         """
-        index_name = os.getenv("PINECONE_INDEX_NAME", "psyco-oncology-rag")
+        index_name = os.getenv("PINECONE_INDEX_NAME", "about-myself-rag")
         pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
         embedding = HuggingFaceEmbeddings(model_name=self.embedding_model)
         
@@ -129,5 +149,5 @@ def format_docs(docs: List[Document]) -> str:
     return "\\n\\n".join(doc.page_content for doc in docs)
 
 # Instantiate the global retriever
-indexer = DocumentIndexer(URLS_TO_LOAD, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL)
+indexer = DocumentIndexer(URLS_TO_LOAD, PDF_DIR, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL)
 retriever = indexer.create_retriever()

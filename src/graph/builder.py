@@ -7,8 +7,8 @@ from langgraph.graph import END, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
 from src.graph.state import GraphState
-from src.graph.nodes import web_search, retrieve, grade_documents, generate
-from src.graph.edges import route_question, decide_to_generate, grade_generation_v_documents_and_question
+from src.graph.nodes import retrieve, grade_documents, generate
+from src.graph.edges import grade_generation_v_documents_and_question
 
 def build_workflow() -> CompiledStateGraph:
     """
@@ -20,33 +20,16 @@ def build_workflow() -> CompiledStateGraph:
     workflow = StateGraph(GraphState)
 
     # --- Add Nodes
-    workflow.add_node("websearch", web_search)
     workflow.add_node("retrieve", retrieve)
     workflow.add_node("grade_documents", grade_documents)
     workflow.add_node("generate", generate)
 
-    # --- Conditional Entry Point
-    workflow.set_conditional_entry_point(
-        route_question,
-        {
-            "websearch": "websearch",
-            "retrieve": "retrieve",
-        },
-    )
+    # --- Entry Point
+    workflow.set_entry_point("retrieve")
 
     # --- Construct Edges
     workflow.add_edge("retrieve", "grade_documents")
-    
-    workflow.add_conditional_edges(
-        "grade_documents",
-        decide_to_generate,
-        {
-            "websearch": "websearch",
-            "generate": "generate",
-        },
-    )
-
-    workflow.add_edge("websearch", "generate")
+    workflow.add_edge("grade_documents", "generate")
 
     workflow.add_conditional_edges(
         "generate",
@@ -54,7 +37,7 @@ def build_workflow() -> CompiledStateGraph:
         {
             "not supported": "generate",  # Retry generation
             "useful": END,                # End of workflow
-            "not useful": "websearch",    # Fallback to search
+            "not useful": END,            # Previously fallback to search, now end
         },
     )
 
