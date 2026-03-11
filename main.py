@@ -11,7 +11,7 @@ def main():
     if len(sys.argv) > 1:
         question = " ".join(sys.argv[1:])
     else:
-        question = "What is agent memory?"
+        question = "Give me a resume about Miguel"
 
     print()
     print("=" * 60)
