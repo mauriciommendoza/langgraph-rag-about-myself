@@ -1,4 +1,4 @@
-# 🚀 Mauricio Mendoza's AI Clone (LangGraph + RAG)
+# AI clone for professional background (LangGraph + RAG)
 
 An intelligent, interactive question-answering agent built to serve as my **Personal AI Clone**. It uses Retrieval-Augmented Generation (RAG) to answer questions about my background, skills, and projects based on a curated knowledge base (PDF resumes). Built with a modular, production-ready architecture.
 
