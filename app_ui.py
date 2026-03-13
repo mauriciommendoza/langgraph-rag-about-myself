@@ -32,12 +32,10 @@ async def on_chat_start():
     """Called when a new chat session starts. Sends a welcome message."""
     await cl.Message(
         content=(
-            "Welcome to my **Personal AI Assistant**!\n\n"
-            "Ask me anything about:\n"
-            "- My background and experience\n"
-            "- My projects and skills\n"
-            "- Anything else you'd like to know about me!\n\n"
-            "I'll search my knowledge base to find the best answer."
+            "Hi there! 👋 I'm **Mauricio Mendoza's AI Clone**.\n\n"
+            "I was built using LangGraph and RAG, and I've read all about Mauricio's background, skills, and projects.\n"
+            "What would you like to know about his experience?\n\n"
+            "*(I'll search my knowledge base to give you the most accurate answer!)*"
         )
     ).send()
 
