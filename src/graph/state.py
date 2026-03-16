@@ -14,10 +14,8 @@ class GraphState(TypedDict):
     Attributes:
         question: The user's question.
         generation: The LLM generated answer.
-        web_search: Flag indicating whether to use web search ('Yes' or 'No').
         documents: List of retrieved documents.
     """
     question: str
     generation: str
-    web_search: str
     documents: List[Document]

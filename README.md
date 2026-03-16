@@ -1,6 +1,6 @@
 # AI clone for professional background (LangGraph + RAG)
 
-An intelligent, interactive question-answering agent built to serve as my **Personal AI Clone**. It uses Retrieval-Augmented Generation (RAG) to answer questions about my background, skills, and projects based on a curated knowledge base (PDF resumes). Built with a modular, production-ready architecture.
+An intelligent, interactive question-answering agent built to serve as my **Personal AI Clone**. It uses Retrieval-Augmented Generation (RAG) to answer questions about my background, skills, and projects based on a curated knowledge base (Markdown files). Built with a modular, production-ready architecture.
 
 ---
 
@@ -20,14 +20,12 @@ This project is designed for tech recruiters and developers to interactively lea
 
 ```mermaid
 graph TD
-    A[User Question via Chainlit UI] --> B{Router}
-    B -->|Vectorstore RAG| C[Retrieve from Pinecone]
-    C --> E{Grade Documents}
-    E -->|Relevant| F[Generate Answer]
-    E -->|Not Relevant| END
-    F --> G{Hallucination Check}
-    G -->|Supported & Useful| H[Final Answer to User]
-    G -->|Not Supported| F
+    A[User Question via Chainlit UI] --> B[Retrieve from Pinecone]
+    B --> C{Grade Documents}
+    C -->|Relevant| D[Generate Answer]
+    D --> E{Hallucination Check}
+    E -->|Supported & Useful| F[Final Answer to User]
+    E -->|Not Supported| D
 ```
 
 ---
@@ -61,7 +59,7 @@ langgraph-rag-about-myself/
 └── src/
     ├── config/                      # Configuration and settings (LLM, prompts)
     ├── retrieval/                   # Reads Markdown files, chunks them, and uploads to Pinecone
-    ├── chains/                      # LangChain logic (Router, Generator, Graders)
+    ├── chains/                      # LangChain logic (Generator, Graders)
     └── graph/                       # LangGraph workflow (Nodes, Edges, State)
 ```
 
@@ -73,7 +71,7 @@ langgraph-rag-about-myself/
 
 - **Python 3.13+**
 - **uv** (Package manager) — [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
-- API Keys for **Groq**, and **Pinecone**.
+- API Keys for **Groq** and **Pinecone**.
 
 ### Step 1: Clone the Repository
 

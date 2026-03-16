@@ -20,7 +20,8 @@ def main():
     print("=" * 60)
     
     inputs = {"question": question}
-    
+    value = {}
+
     # Run the graph using the iterator form `app.stream`
     for output in app.stream(inputs):
         for key, value in output.items():
