@@ -5,6 +5,10 @@ Run with: chainlit run app_ui.py --port 8080
 """
 
 import asyncio
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import chainlit as cl
 from src.graph.builder import app
 

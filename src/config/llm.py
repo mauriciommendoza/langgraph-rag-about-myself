@@ -24,7 +24,7 @@ def get_llm() -> ChatGroq:
         raise ValueError("GROQ_API_KEY environment variable is not set. Please check your .env file.")
 
     return ChatGroq(
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         temperature=0,
         api_key=api_key
     )
