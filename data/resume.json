@@ -8,7 +8,7 @@
       "email": "mauriciommendoza1@gmail.com",
       "linkedin": "linkedin.com/in/mauriciommendoza"
     },
-    "professional_summary": "Biomedical engineer currently pursuing a master's degree, passionate about technology, medicine, and serving others. My career has been marked by a constant pursuit of personal and professional growth, leading me to explore opportunities in various states of Mexico, both in the academic and professional spheres. I have a solid background in developing technological solutions applied to health and wellness, combining my skills in biomedical engineering with data analysis and artificial intelligence to address complex problems in the medical sector. My focus is on innovation and process improvement that positively impacts people's quality of life."
+    "professional_summary": "Biomedical Engineer and AI/ML Specialist with a Master of Science Degree in Information Processing. Passionate about bridging the gap between healthcare and cutting-edge artificial intelligence. I possess a strong background in designing and developing advanced AI-driven solutions, heavily leveraging Large Language Models (LLMs), LangChain, LangGraph, and Vector Databases to build autonomous agents and robust Retrieval-Augmented Generation (RAG) architectures. My career is defined by a deep commitment to innovation, transforming complex clinical data into actionable insights through Machine Learning, and deploying scalable AI systems that significantly improve healthcare processes and patient outcomes."
   },
   "education": [
     {
@@ -31,8 +31,8 @@
       "duration": "July 2025 – February 2026",
       "responsibilities": [
         "Backend development in Python for transformation, normalization, and standardization of clinical data to the FHIR HL7 standard, enabling interoperability between dental and veterinary PMS systems.",
-        "Design and implementation of a Retrieval-Augmented Classification (RAC) architecture over vector databases, enabling hybrid search (lexical + semantic) to improve integration quality with machine learning registered MLflow models.",
-        "Integration of LLM-based agents using LangGraph (ReAct) to automate data ingestion, classification, and enrichment processes.",
+        "Design and implementation of a scalable Retrieval-Augmented Generation (RAG) architecture over Pinecone vector databases, enabling hybrid search (lexical + semantic) to improve integration quality with machine learning registered MLflow models.",
+        "Pioneering the integration of autonomous LLM-based agents using LangGraph and LangChain (ReAct framework) to fully automate complex data ingestion, classification, and clinical enrichment processes.",
         "Initial implementation of Knowledge Graphs (KG) to model clinical relationships and enhance information retrieval based on facts and contextual reasoning."
       ]
     },
@@ -42,14 +42,12 @@
       "location": "Zacatecas, Mexico",
       "duration": "August 2023 – August 2025",
       "responsibilities": [
-        "Interpretable deep learning for breast lesion classification: A SHAP-based comparison of CESM and digital mammography",
-        "On-device conversational agent for psycho-oncology based on acceptance and commitment therapy manuals",
-        "Assessing ResNeXt and RegNet Models for Diabetic Retinopathy Classification: A Comprehensive Comparative Study",
-        "Developed a predictive model for ovarian cancer detection using machine learning techniques and genetic algorithms, improving early competitive diagnosis with AUCs best performances at 90.55%.",
-        "Conducted statistical and comparative analyses of Type 2 Diabetes Mellitus in Mexican patients, identifying significant clinical and anthropometric risk Factors.",
-        "Presented research findings at international conferences, focusing on applications in anthropometric data analysis.",
-        "Analyzed clinical data from Hospital Siglo XXI using RStudio to create detailed visualizations, revealing key gender-specific risk factors for diabetes.",
-        "Published peer-reviewed papers on the integration of AI in biomedical applications."
+        "Interpretable deep learning for breast lesion classification: A SHAP-based comparison of CESM and digital mammography.",
+        "Developed an on-device conversational AI agent for psycho-oncology based on acceptance and commitment therapy manuals.",
+        "Assessed ResNeXt and RegNet Models for Diabetic Retinopathy Classification: A Comprehensive Comparative Study.",
+        "Developed a custom predictive machine learning model for ovarian cancer detection using genetic algorithms, improving early competitive diagnosis with AUCs performing at 90.55%.",
+        "Conducted statistical and comparative ML analyses of Type 2 Diabetes Mellitus in Mexican patients, identifying significant clinical and anthropometric risk factors.",
+        "Analyzed clinical data from Hospital Siglo XXI using RStudio and Python to create highly detailed visualizations, revealing key gender-specific risk factors for diabetes."
       ]
     },
     {
@@ -58,11 +56,10 @@
       "location": "Bahía de Banderas, Nayarit, Mexico",
       "duration": "November 2021 - August 2023",
       "responsibilities": [
-        "Attended to user needs regarding medical devices.",
-        "Performed corrective maintenance and addressed frequent failures.",
-        "Conducted scheduled preventive maintenance.",
-        "Provided training on the use and care of medical equipment.",
-        "Contacted medical equipment suppliers for specific solutions.",
+        "Attended to user needs regarding medical devices, reducing operational gaps between technology and clinical staff.",
+        "Performed corrective maintenance and addressed frequent failures across 2500+ medical devices.",
+        "Conducted scheduled preventive maintenance and ensured 95% equipment functionality.",
+        "Provided advanced training on the use and care of medical equipment, including RIS/PACS troubleshooting in a centralized router architecture.",
         "Management leader in the imaging department and intensive care unit."
       ]
     },
@@ -85,10 +82,8 @@
       "duration": "April 2021 – November 2021",
       "responsibilities": [
         "Prepared inventory, and executed preventive and corrective maintenance.",
-        "Established the biomedical department in the clinic.",
-        "Introduced predictive maintenance techniques, reducing unplanned downtime.",
-        "Prepared detailed inventory reports, achieving 100% compliance with regulatory standards.",
-        "Collaborated with cross-functional teams to address critical equipment needs."
+        "Established the entire biomedical department in the clinic.",
+        "Introduced predictive maintenance techniques, drastically reducing unplanned downtime."
       ]
     },
     {
@@ -110,37 +105,72 @@
       ]
     }
   ],
+  "projects": [
+    {
+      "name": "LangGraph Autonomous RAG Agent (About Myself)",
+      "role": "Lead Generative AI Developer",
+      "duration": "March 2026 - Present",
+      "description": "Designed and developed a fully autonomous, local Retrieval-Augmented Generation (RAG) agent capable of deeply understanding and reasoning over complex unstructured personal and professional data (JSON).",
+      "technologies_used": [
+        "Python",
+        "LangChain",
+        "LangGraph",
+        "Pinecone Vector Database",
+        "HuggingFace Embeddings",
+        "Groq Llama-3",
+        "FastAPI",
+        "Chainlit"
+      ],
+      "key_features": [
+        "Architected a custom LangGraph state machine with routing, retrieving, grading, and hallucination-checking nodes.",
+        "Implemented a highly optimized chunking strategy (1500 chars/200 overlap) configured for perfect structured JSON context preservation.",
+        "Integrated a Pinecone vector store with HuggingFace's all-MiniLM-L6-v2 embeddings for high-fidelity semantic search.",
+        "Built an interactive, conversational UI using Chainlit to replace standard CLI interactions.",
+        "Ensured strict zero-hallucination policies by utilizing LangGraph's conditional state edges and strict document grading."
+      ]
+    }
+  ],
   "complementary_training": [
     "Ongoing POE certificate delivered by ARSA",
     "NOM 035 Certificate",
     "24 PEP Siemens Connect course sessions (focused on medical imaging)",
-    "Training on the use and care of medical equipment provided directly by the supplier for: portable X-rays, ultrasounds, mammography (with stereotactic biopsy), CT scanner, and management of 2D and 3D reconstructions",
-    "Direct hands-on work with imaging equipment",
-    "Attendance at biomedical engineering conferences",
-    "Use and operation of biomedical simulators and analyzers",
-    "Use and operation of the DIAPACT CRRT System provided by BBraun",
+    "Training on the use and care of medical equipment provided directly by the supplier for: portable X-rays, ultrasounds, mammography (with stereotactic biopsy), CT scanner, and management of 2D and 3D reconstructions.",
     "Instructor at the Clinical Engineering Workshop at Universidad Autónoma de Zacatecas (2019)"
   ],
   "technical_and_general_skills": {
-    "machine_learning": [
-      "Predictive model development", 
-      "Complex data analysis"
+    "artificial_intelligence_and_machine_learning": [
+      "Large Language Models (LLMs) & Generative AI",
+      "Agentic Workflows & Frameworks (LangChain, LangGraph)",
+      "Retrieval-Augmented Generation (RAG) Architectures",
+      "Vector Databases (Pinecone)",
+      "Predictive Machine Learning Modeling",
+      "Deep Learning",
+      "Complex clinical data analysis"
     ],
     "data_science_and_analysis": [
       "Data science and analysis",
       "Scientific research",
-      "Data manipulation", 
-      "Statistical Analysis", 
-      "Advanced visualization", 
-      "Python", 
-      "RStudio", 
+      "Data manipulation",
+      "Statistical Analysis",
+      "Advanced visualization",
       "LookerStudio"
     ],
-    "programming_languages": [
-      "Python (Pandas, TensorFlow, MLFlow, SHAP, NumPy, SciPy, Scikit-learn, Matplotlib, Plotly)", 
-      "RStudio", 
-      "Looker", 
-      "Tableau"
+    "programming_languages_and_tools": [
+      "Python",
+      "Pandas",
+      "TensorFlow",
+      "MLFlow",
+      "SHAP",
+      "NumPy",
+      "SciPy",
+      "Scikit-learn",
+      "RStudio",
+      "Matplotlib",
+      "Plotly",
+      "Looker",
+      "Tableau",
+      "Git",
+      "SQL"
     ],
     "biomedical_and_clinical_engineering": [
       "Clinical Engineering",
@@ -152,10 +182,6 @@
       "Experience in quality control and continuous improvement processes",
       "Corrective and preventive maintenance in a centralized router architecture",
       "Clinical Research"
-    ],
-    "other_systems": [
-      "SQL management", 
-      "Git"
     ]
   },
   "specific_and_soft_skills": [

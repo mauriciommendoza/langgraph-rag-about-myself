@@ -9,8 +9,8 @@ from typing import List
 EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
 
 # Text chunking configuration
-CHUNK_SIZE: int = 250
-CHUNK_OVERLAP: int = 0
+CHUNK_SIZE: int = 1500
+CHUNK_OVERLAP: int = 200
 
 # Source URLs to load documents from
 URLS_TO_LOAD: List[str] = [
