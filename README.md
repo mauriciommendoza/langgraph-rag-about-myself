@@ -9,11 +9,10 @@ An intelligent, interactive question-answering agent built to serve as my **Pers
 This project is designed for tech recruiters and developers to interactively learn about my profile. The autonomous agent:
 
 1. **Reads your question** via a clean, web-based Chat UI (Chainlit).
-2. **Searches a local knowledge base** (my PDF resumes stored in `data/` and indexed in Pinecone) for relevant facts.
+2. **Searches a local knowledge base** (my JSON data stored in `data/` and indexed in Pinecone) for relevant facts.
 3. **Evaluates the quality** of what it found — are the documents actually useful?
-4. **Falls back to the internet** (via Tavily) if the local documents aren't enough to answer.
-5. **Generates a concise, professional answer** using Groq's LLM (`llama-3.3-70b-versatile`).
-6. **Self-checks for hallucinations** — if the answer isn't grounded in facts, it retries automatically.
+4. **Generates a concise, professional answer** using Groq's LLM (`llama-3.3-70b-versatile`).
+5. **Self-checks for hallucinations** — if the answer isn't grounded in facts, it retries automatically.
 
 ---
 
@@ -23,11 +22,9 @@ This project is designed for tech recruiters and developers to interactively lea
 graph TD
     A[User Question via Chainlit UI] --> B{Router}
     B -->|Vectorstore RAG| C[Retrieve from Pinecone]
-    B -->|Web Search| D[Web Search via Tavily]
     C --> E{Grade Documents}
-    D --> E
     E -->|Relevant| F[Generate Answer]
-    E -->|Not Relevant| D
+    E -->|Not Relevant| END
     F --> G{Hallucination Check}
     G -->|Supported & Useful| H[Final Answer to User]
     G -->|Not Supported| F
@@ -44,7 +41,6 @@ graph TD
 | **Orchestration** | LangGraph + LangChain                         | Graph-based agent workflow                   |
 | **Vector Store**  | Pinecone (Serverless)                         | Cloud storage for document embeddings        |
 | **Embeddings**    | HuggingFace (`all-MiniLM-L6-v2`)              | Converts text to numerical vectors           |
-| **Web Search**    | Tavily Search API                             | Real-time internet search fallback           |
 | **Package Manager**| uv                                           | Ultra-fast Python dependency management      |
 
 ---
@@ -59,12 +55,12 @@ langgraph-rag-about-myself/
 ├── pyproject.toml / uv.lock         # Project dependencies managed by `uv`
 ├── Dockerfile                       # Configuration for Hugging Face Spaces deployment
 │
-├── data/                            # Drop your PDFs here (e.g., Resume, Cover Letters)
-│   └── Mauricio Corious Facts.pdf 
+├── data/                            # Drop your JSON files here (e.g., resume.json, curious_facts.json)
+│   └── resume.json 
 │
 └── src/
     ├── config/                      # Configuration and settings (LLM, prompts)
-    ├── retrieval/                   # Reads PDFs, chunks them, and uploads to Pinecone
+    ├── retrieval/                   # Reads JSONs, chunks them, and uploads to Pinecone
     ├── chains/                      # LangChain logic (Router, Generator, Graders)
     └── graph/                       # LangGraph workflow (Nodes, Edges, State)
 ```
@@ -77,7 +73,7 @@ langgraph-rag-about-myself/
 
 - **Python 3.13+**
 - **uv** (Package manager) — [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
-- API Keys for **Groq**, **Pinecone**, and **Tavily**.
+- API Keys for **Groq**, and **Pinecone**.
 
 ### Step 1: Clone the Repository
 
@@ -100,10 +96,9 @@ Create a `.env` file in the project root:
 GROQ_API_KEY="your_groq_api_key_here"
 PINECONE_API_KEY="your_pinecone_api_key_here"
 PINECONE_INDEX_NAME="about-myself-rag"
-TAVILY_API_KEY="your_tavily_api_key_here"
 ```
 
-> **Smart Indexing:** Just drop your PDFs into the `data/` folder. The app automatically reads them, chunks them, and uploads them to Pinecone on launch. If vectors already exist, it skips the upload to save time.
+> **Smart Indexing:** Just drop your JSON files into the `data/` folder. The app automatically reads them, chunks them, and uploads them to Pinecone on launch. If vectors already exist, it skips the upload to save time.
 
 ### Step 4: Run the UI
 
