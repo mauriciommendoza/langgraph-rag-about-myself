@@ -18,5 +18,5 @@ URLS_TO_LOAD: List[str] = [
 ]
 
 import os
-# Path to local PDF files
-PDF_DIR: str = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
+# Path to local data files (JSON)
+DATA_DIR: str = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")

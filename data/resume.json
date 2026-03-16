@@ -1,0 +1,191 @@
+{
+  "personal_info": {
+    "name": "MIGUEL MAURICIO MENDOZA MENDOZA",
+    "location": "Zacatecas, Zacatecas, Mexico",
+    "date_of_birth": "23/10/1997",
+    "contact": {
+      "phone": "614 177 03 16",
+      "email": "mauriciommendoza1@gmail.com",
+      "linkedin": "linkedin.com/in/mauriciommendoza"
+    },
+    "professional_summary": "Biomedical engineer currently pursuing a master's degree, passionate about technology, medicine, and serving others. My career has been marked by a constant pursuit of personal and professional growth, leading me to explore opportunities in various states of Mexico, both in the academic and professional spheres. I have a solid background in developing technological solutions applied to health and wellness, combining my skills in biomedical engineering with data analysis and artificial intelligence to address complex problems in the medical sector. My focus is on innovation and process improvement that positively impacts people's quality of life."
+  },
+  "education": [
+    {
+      "degree": "Master of Science in Information Processing",
+      "institution": "Universidad Autónoma de Zacatecas",
+      "duration": "August 2023 - August 2025",
+      "details": "Thesis project focused on artificial intelligence applied to Diabetes in Mexican patients. Approved elective course in medical physics during academic training."
+    },
+    {
+      "degree": "Bachelor’s degree in biomedical engineering",
+      "institution": "Universidad Autónoma de Chihuahua",
+      "duration": "August 2015 - December 2020"
+    }
+  ],
+  "professional_experience": [
+    {
+      "role": "Data Engineer & AI Engineer",
+      "company": "HeyDonto API",
+      "location": "Guadalajara, Mexico",
+      "duration": "July 2025 – February 2026",
+      "responsibilities": [
+        "Backend development in Python for transformation, normalization, and standardization of clinical data to the FHIR HL7 standard, enabling interoperability between dental and veterinary PMS systems.",
+        "Design and implementation of a Retrieval-Augmented Classification (RAC) architecture over vector databases, enabling hybrid search (lexical + semantic) to improve integration quality with machine learning registered MLflow models.",
+        "Integration of LLM-based agents using LangGraph (ReAct) to automate data ingestion, classification, and enrichment processes.",
+        "Initial implementation of Knowledge Graphs (KG) to model clinical relationships and enhance information retrieval based on facts and contextual reasoning."
+      ]
+    },
+    {
+      "role": "Research Assistant (Data Science)",
+      "company": "Universidad Autónoma de Zacatecas",
+      "location": "Zacatecas, Mexico",
+      "duration": "August 2023 – August 2025",
+      "responsibilities": [
+        "Interpretable deep learning for breast lesion classification: A SHAP-based comparison of CESM and digital mammography",
+        "On-device conversational agent for psycho-oncology based on acceptance and commitment therapy manuals",
+        "Assessing ResNeXt and RegNet Models for Diabetic Retinopathy Classification: A Comprehensive Comparative Study",
+        "Developed a predictive model for ovarian cancer detection using machine learning techniques and genetic algorithms, improving early competitive diagnosis with AUCs best performances at 90.55%.",
+        "Conducted statistical and comparative analyses of Type 2 Diabetes Mellitus in Mexican patients, identifying significant clinical and anthropometric risk Factors.",
+        "Presented research findings at international conferences, focusing on applications in anthropometric data analysis.",
+        "Analyzed clinical data from Hospital Siglo XXI using RStudio to create detailed visualizations, revealing key gender-specific risk factors for diabetes.",
+        "Published peer-reviewed papers on the integration of AI in biomedical applications."
+      ]
+    },
+    {
+      "role": "Biomedical Expert",
+      "company": "APP Hospital General De Zona #33 (IMSS)",
+      "location": "Bahía de Banderas, Nayarit, Mexico",
+      "duration": "November 2021 - August 2023",
+      "responsibilities": [
+        "Attended to user needs regarding medical devices.",
+        "Performed corrective maintenance and addressed frequent failures.",
+        "Conducted scheduled preventive maintenance.",
+        "Provided training on the use and care of medical equipment.",
+        "Contacted medical equipment suppliers for specific solutions.",
+        "Management leader in the imaging department and intensive care unit."
+      ]
+    },
+    {
+      "role": "Biomedical Engineer",
+      "company": "Hospital Infantil de Especialidades",
+      "location": "Chihuahua, Chihuahua, Mexico",
+      "duration": "January 2021 - July 2021",
+      "responsibilities": [
+        "Updated the medical equipment inventory.",
+        "Created and monitored preventive maintenance schedules.",
+        "Performed preventive, corrective, and predictive maintenance.",
+        "Managed the lifecycle of medical equipment."
+      ]
+    },
+    {
+      "role": "Biomedical Engineer (Management Manager)",
+      "company": "Clínica de Jesús",
+      "location": "Chihuahua, Chihuahua, Mexico",
+      "duration": "April 2021 – November 2021",
+      "responsibilities": [
+        "Prepared inventory, and executed preventive and corrective maintenance.",
+        "Established the biomedical department in the clinic.",
+        "Introduced predictive maintenance techniques, reducing unplanned downtime.",
+        "Prepared detailed inventory reports, achieving 100% compliance with regulatory standards.",
+        "Collaborated with cross-functional teams to address critical equipment needs."
+      ]
+    },
+    {
+      "role": "Service Engineer",
+      "company": "ITM",
+      "location": "Chihuahua / Monterrey, Mexico",
+      "duration": "July 2021",
+      "responsibilities": [
+        "Delivered high-quality preventive and corrective maintenance services for 30+ devices within tight deadlines."
+      ]
+    },
+    {
+      "role": "IT Technician",
+      "company": "Visteon",
+      "location": "Chihuahua, Mexico",
+      "duration": "January 2020",
+      "responsibilities": [
+        "Conducted IT equipment inventory and maintenance, ensuring operational efficiency across multiple departments."
+      ]
+    }
+  ],
+  "complementary_training": [
+    "Ongoing POE certificate delivered by ARSA",
+    "NOM 035 Certificate",
+    "24 PEP Siemens Connect course sessions (focused on medical imaging)",
+    "Training on the use and care of medical equipment provided directly by the supplier for: portable X-rays, ultrasounds, mammography (with stereotactic biopsy), CT scanner, and management of 2D and 3D reconstructions",
+    "Direct hands-on work with imaging equipment",
+    "Attendance at biomedical engineering conferences",
+    "Use and operation of biomedical simulators and analyzers",
+    "Use and operation of the DIAPACT CRRT System provided by BBraun",
+    "Instructor at the Clinical Engineering Workshop at Universidad Autónoma de Zacatecas (2019)"
+  ],
+  "technical_and_general_skills": {
+    "machine_learning": [
+      "Predictive model development", 
+      "Complex data analysis"
+    ],
+    "data_science_and_analysis": [
+      "Data science and analysis",
+      "Scientific research",
+      "Data manipulation", 
+      "Statistical Analysis", 
+      "Advanced visualization", 
+      "Python", 
+      "RStudio", 
+      "LookerStudio"
+    ],
+    "programming_languages": [
+      "Python (Pandas, TensorFlow, MLFlow, SHAP, NumPy, SciPy, Scikit-learn, Matplotlib, Plotly)", 
+      "RStudio", 
+      "Looker", 
+      "Tableau"
+    ],
+    "biomedical_and_clinical_engineering": [
+      "Clinical Engineering",
+      "Medical equipment management and maintenance",
+      "Medical Equipment Management (Preventive, predictive, and corrective maintenance, regulatory compliance)",
+      "RIS/PACS management",
+      "Radiation protection",
+      "Hospital administration",
+      "Experience in quality control and continuous improvement processes",
+      "Corrective and preventive maintenance in a centralized router architecture",
+      "Clinical Research"
+    ],
+    "other_systems": [
+      "SQL management", 
+      "Git"
+    ]
+  },
+  "specific_and_soft_skills": [
+    "Good communication",
+    "Effective communication",
+    "Teamwork and leadership",
+    "Problem solving",
+    "Critical thinking",
+    "Strategic planning",
+    "Proficient use of computational tools",
+    "Adaptability"
+  ],
+  "languages": [
+    {
+      "language": "Spanish",
+      "proficiency": "Native"
+    },
+    {
+      "language": "English",
+      "proficiency": "Advanced"
+    }
+  ],
+  "certifications": [
+    "Data Science using Machine Learning Algorithm with Big Data | DEC 2024",
+    "Health informatics and marketspace | Healthcare Data Management and interfaces | by Illinois Tech | JAN 2026",
+    "Introduction and preparation for AWS Certified Cloud Practitioner (CLF-C01) | FEB 2025"
+  ],
+  "key_achievements": [
+    "Published research on ovarian cancer AI detection methodologies in 'Network Modeling Analysis in Health Informatics and Bioinformatics'.",
+    "Presented studies on Type 2 Diabetes Mellitus at national conferences, contributing to public health knowledge.",
+    "Developed predictive models improving early diagnosis accuracy by 15%."
+  ]
+}

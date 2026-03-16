@@ -4,14 +4,16 @@ Handles downloading, chunking, embedding, and vectorizing documents from URLs.
 """
 
 import os
+import glob
+import json
 from typing import List
 from langchain_core.documents import Document
-from langchain_community.document_loaders import WebBaseLoader, PyPDFDirectoryLoader
+from langchain_community.document_loaders import WebBaseLoader
 from langchain_pinecone import PineconeVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from src.config.settings import URLS_TO_LOAD, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL, PDF_DIR
+from src.config.settings import URLS_TO_LOAD, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL, DATA_DIR
 from dotenv import load_dotenv
 from pinecone import Pinecone, ServerlessSpec
 
@@ -22,29 +24,29 @@ os.environ["USER_AGENT"] = "Mozilla/5.0 (compatible; LangGraph-RAG-Agent/1.0; +h
 
 class DocumentIndexer:
     """
-    A class responsible for fetching documents from URLs and local PDFs, 
+    A class responsible for fetching documents from URLs and local JSONs, 
     splitting them into chunks, and storing them in a Pinecone vector store.
     """
     
-    def __init__(self, urls: List[str], pdf_dir: str, chunk_size: int, chunk_overlap: int, embedding_model: str):
+    def __init__(self, urls: List[str], data_dir: str, chunk_size: int, chunk_overlap: int, embedding_model: str):
         """
-        Initializes the indexer with URLs, PDF directory, and embedding settings.
+        Initializes the indexer with URLs, JSON directory, and embedding settings.
         
         Args:
             urls (List[str]): URLs to scrape.
-            pdf_dir (str): Path to directory containing PDF files.
+            data_dir (str): Path to directory containing JSON files.
             chunk_size (int): Max characters for each document chunk.
             chunk_overlap (int): Number of overlapping characters between chunks.
             embedding_model (str): HuggingFace embedding model ID.
         """
         self.urls = urls
-        self.pdf_dir = pdf_dir
+        self.data_dir = data_dir
         self.chunk_size = chunk_size
         self.chunk_overlap = chunk_overlap
         self.embedding_model = embedding_model
         
     def _load_documents(self) -> List[Document]:
-        """Loads documents from both the provided URLs and local PDFs."""
+        """Loads documents from both the provided URLs and local JSONs."""
         all_docs = []
         
         # Load from URLs
@@ -53,16 +55,24 @@ class DocumentIndexer:
             url_docs = [WebBaseLoader(url).load() for url in self.urls]
             all_docs.extend([item for sublist in url_docs for item in sublist])
             
-        # Load from PDFs
-        if os.path.exists(self.pdf_dir):
-            print(f"  [Indexer] Scanning '{self.pdf_dir}' for PDF files...")
-            pdf_loader = PyPDFDirectoryLoader(self.pdf_dir)
-            pdf_docs = pdf_loader.load()
-            if pdf_docs:
-                print(f"  [Indexer] Loaded {len(pdf_docs)} total pages from PDFs.")
-                all_docs.extend(pdf_docs)
+        # Load from JSONs
+        if os.path.exists(self.data_dir):
+            print(f"  [Indexer] Scanning '{self.data_dir}' for JSON files...")
+            json_files = glob.glob(os.path.join(self.data_dir, "**/*.json"), recursive=True)
+            if json_files:
+                for filepath in json_files:
+                    try:
+                        with open(filepath, 'r', encoding='utf-8') as f:
+                            data = json.load(f)
+                            # Convert JSON to a formatted string to maintain structure context
+                            text_content = json.dumps(data, indent=2, ensure_ascii=False)
+                            doc = Document(page_content=text_content, metadata={"source": filepath})
+                            all_docs.append(doc)
+                    except Exception as e:
+                        print(f"  [Indexer] Error reading {filepath}: {e}")
+                print(f"  [Indexer] Loaded {len(json_files)} JSON file(s).")
             else:
-                print("  [Indexer] No PDFs found in the directory.")
+                print("  [Indexer] No JSONs found in the directory.")
                 
         return all_docs
 
@@ -149,5 +159,5 @@ def format_docs(docs: List[Document]) -> str:
     return "\\n\\n".join(doc.page_content for doc in docs)
 
 # Instantiate the global retriever
-indexer = DocumentIndexer(URLS_TO_LOAD, PDF_DIR, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL)
+indexer = DocumentIndexer(URLS_TO_LOAD, DATA_DIR, CHUNK_SIZE, CHUNK_OVERLAP, EMBEDDING_MODEL)
 retriever = indexer.create_retriever()

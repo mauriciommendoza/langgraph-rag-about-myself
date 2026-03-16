@@ -1,0 +1,38 @@
+{
+  "curious_facts": {
+    "favorite_color": "Green",
+    "birth_info": {
+      "city": "Chihuahua",
+      "state": "Chihuahua",
+      "country": "México",
+      "date": "October 23, 1997"
+    },
+    "preferences": {
+      "favorite_music": "Latin music",
+      "favorite_food": "Spaghetti Bolognese",
+      "favorite_book": "Atomic Habits"
+    },
+    "personal_traits": [
+      "Loves to sing but is shy about it",
+      "Sees himself as a leader"
+    ],
+    "sports_and_hobbies": {
+      "loves_playing": ["Baseball", "American football", "Flag football"],
+      "teams_supported": ["Steelers", "Yankees"],
+      "hobbies": ["Sports videogames", "Learning about newborn technologies"]
+    },
+    "personal_life": {
+      "relationship_status": "Engaged in October, with plans to get married by August 1st",
+      "pets": [
+        {
+          "type": "Cat",
+          "name": "Ray"
+        },
+        {
+          "type": "Cat",
+          "name": "Mushu"
+        }
+      ]
+    }
+  }
+}
