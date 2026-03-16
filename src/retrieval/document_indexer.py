@@ -5,7 +5,6 @@ Handles downloading, chunking, embedding, and vectorizing documents from URLs.
 
 import os
 import glob
-import json
 from typing import List
 from langchain_core.documents import Document
 from langchain_community.document_loaders import WebBaseLoader
@@ -55,24 +54,22 @@ class DocumentIndexer:
             url_docs = [WebBaseLoader(url).load() for url in self.urls]
             all_docs.extend([item for sublist in url_docs for item in sublist])
             
-        # Load from JSONs
+        # Load from Markdown files
         if os.path.exists(self.data_dir):
-            print(f"  [Indexer] Scanning '{self.data_dir}' for JSON files...")
-            json_files = glob.glob(os.path.join(self.data_dir, "**/*.json"), recursive=True)
-            if json_files:
-                for filepath in json_files:
+            print(f"  [Indexer] Scanning '{self.data_dir}' for Markdown files...")
+            md_files = glob.glob(os.path.join(self.data_dir, "**/*.md"), recursive=True)
+            if md_files:
+                for filepath in md_files:
                     try:
                         with open(filepath, 'r', encoding='utf-8') as f:
-                            data = json.load(f)
-                            # Convert JSON to a formatted string to maintain structure context
-                            text_content = json.dumps(data, indent=2, ensure_ascii=False)
+                            text_content = f.read()
                             doc = Document(page_content=text_content, metadata={"source": filepath})
                             all_docs.append(doc)
                     except Exception as e:
                         print(f"  [Indexer] Error reading {filepath}: {e}")
-                print(f"  [Indexer] Loaded {len(json_files)} JSON file(s).")
+                print(f"  [Indexer] Loaded {len(md_files)} Markdown file(s).")
             else:
-                print("  [Indexer] No JSONs found in the directory.")
+                print("  [Indexer] No Markdown files found in the directory.")
                 
         return all_docs
 
