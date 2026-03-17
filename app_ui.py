@@ -31,9 +31,23 @@ def run_graph(question: str) -> list:
     except Exception as e:
         error_msg = str(e)
         if "rate_limit_exceeded" in error_msg.lower() or "429" in error_msg:
-            results.append(("error", {"generation": "⚠️ **Groq API Rate Limit Exceeded** ⚠️\n\nI have reached the maximum number of daily tokens allowed on the free Groq tier. Please try again tomorrow!"}))
+            results.append(("error", {"generation": (
+                "⚠️ **Rate Limit Exceeded** ⚠️\n\n"
+                "I've hit the maximum number of requests allowed on the free Groq tier. "
+                "Please wait a minute and try again, or come back later!"
+            )}))
+        elif "timed out" in error_msg.lower() or "timeout" in error_msg.lower():
+            results.append(("error", {"generation": (
+                "⏳ **Request Timed Out** ⏳\n\n"
+                "The request took too long to process. "
+                "Please try again with a simpler question."
+            )}))
         else:
-            results.append(("error", {"generation": f"❌ **An unexpected error occurred:**\n\n```text\n{error_msg}\n```"}))
+            results.append(("error", {"generation": (
+                "❌ **An unexpected error occurred** ❌\n\n"
+                f"```text\n{error_msg}\n```\n\n"
+                "Please try again later."
+            )}))
     return results
 
 

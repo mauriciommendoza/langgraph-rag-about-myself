@@ -1126,7 +1126,7 @@ dependencies = [
     { name = "langchain-text-splitters" },
     { name = "langgraph" },
     { name = "langsmith" },
-    { name = "pinecone" },
+    { name = "pinecone-client" },
     { name = "python-dotenv" },
     { name = "sentence-transformers" },
     { name = "tiktoken" },
@@ -1140,11 +1140,11 @@ requires-dist = [
     { name = "langchain", specifier = ">=1.2.10" },
     { name = "langchain-groq", specifier = ">=1.1.2" },
     { name = "langchain-huggingface", specifier = ">=1.2.1" },
-    { name = "langchain-pinecone", specifier = ">=0.2.13" },
+    { name = "langchain-pinecone", specifier = ">=0.2.13,<0.3.0" },
     { name = "langchain-text-splitters", specifier = ">=1.1.1" },
     { name = "langgraph", specifier = ">=1.0.10" },
     { name = "langsmith", specifier = ">=0.7.16" },
-    { name = "pinecone", specifier = ">=6.0.0" },
+    { name = "pinecone-client", specifier = ">=5.0.0,<6.0.0" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "sentence-transformers", specifier = ">=5.2.3" },
     { name = "tiktoken", specifier = ">=0.12.0" },
@@ -2431,6 +2431,23 @@ asyncio = [
 ]
 
 [[package]]
+name = "pinecone-client"
+version = "5.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "certifi" },
+    { name = "pinecone-plugin-inference" },
+    { name = "pinecone-plugin-interface" },
+    { name = "tqdm" },
+    { name = "typing-extensions" },
+    { name = "urllib3", marker = "python_full_version < '4'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/98/a4/739fe0a4a173658d541206ec7fdb0cc4c9ddc364de216af668b988bf0868/pinecone_client-5.0.1.tar.gz", hash = "sha256:11c33ff5d1c38a6ce69e69fe532c0f22f312fb28d761bb30b3767816d3181d64", size = 122207, upload-time = "2024-08-01T20:47:05.26Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/55/d0/c64336b8f76e63296d04b885c545c0872ff070e6b2bc725dd0ff3ae681dc/pinecone_client-5.0.1-py3-none-any.whl", hash = "sha256:c8f7835e1045ba84e295f217a8e85573ffb80b41501bbc1af6d92c9631c567a7", size = 244818, upload-time = "2024-08-01T20:47:02.165Z" },
+]
+
+[[package]]
 name = "pinecone-plugin-assistant"
 version = "1.8.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2441,6 +2458,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/b2/01/65c4c3a81732fa379f8e7f78a8c18aa57a1139f5b79d58b93a69f2fc8cb0/pinecone_plugin_assistant-1.8.0.tar.gz", hash = "sha256:8e8682cff30f9bae9243b384021aba71c91f4e6ef1650e9d63ee64aab83cba87", size = 150435, upload-time = "2025-08-31T14:31:18.046Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/dd/49/62ab8e2f9098bf8593e36bbe6e729fcc0500bafca7d88be7b62eac66c8b0/pinecone_plugin_assistant-1.8.0-py3-none-any.whl", hash = "sha256:71ae42c3b4478d23138cbc4fe3505db561319a826f5aff4ef2e306a25ac56686", size = 259281, upload-time = "2025-08-31T14:31:16.587Z" },
+]
+
+[[package]]
+name = "pinecone-plugin-inference"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pinecone-plugin-interface" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/03/96/a5738492f131166eb2f9e99fb15a724cf482192e8443bf7069809485432b/pinecone_plugin_inference-1.1.0.tar.gz", hash = "sha256:283e5ae4590b901bf2179beb56fc3d1b715e63582f37ec7abb0708cf70912d1f", size = 48997, upload-time = "2024-09-13T18:54:55.113Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d8/5e/a7eb453cfb3aa9c8c995a1dca5fcf57f79b67400593d5c6759571567e30c/pinecone_plugin_inference-1.1.0-py3-none-any.whl", hash = "sha256:32c61aba21c9a28fdcd0e782204c1ca641aeb3fd6e42764fbf0de8186eb657ec", size = 85353, upload-time = "2024-09-13T18:54:53.673Z" },
 ]
 
 [[package]]
