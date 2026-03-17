@@ -15,7 +15,9 @@ class GraphState(TypedDict):
         question: The user's question.
         generation: The LLM generated answer.
         documents: List of retrieved documents.
+        model_name: The selected LLM model identifier.
     """
     question: str
     generation: str
     documents: List[Document]
+    model_name: str

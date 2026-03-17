@@ -9,3 +9,11 @@ wheels/
 # Virtual environments
 .venv
 .env
+
+# Temp files
+*.tmp
+temp.txt
+uv_sync_output.txt
+
+# Local docs (not for version control)
+HF_DEPLOY_GUIDE.md

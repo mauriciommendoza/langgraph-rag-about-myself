@@ -10,22 +10,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import chainlit as cl
+from chainlit.input_widget import Select
 from src.graph.builder import app
+from src.config.llm import AVAILABLE_MODELS, DEFAULT_MODEL
 
 
-def run_graph(question: str) -> list:
+def run_graph(question: str, model_name: str) -> list:
     """
     Runs the LangGraph agent synchronously and collects all node outputs.
 
     Args:
         question (str): The user's question.
+        model_name (str): The selected model identifier.
 
     Returns:
         list: A list of (node_name, node_output) tuples from the graph execution.
     """
     results = []
     try:
-        for output in app.stream({"question": question}):
+        for output in app.stream({"question": question, "model_name": model_name}):
             for node_name, node_output in output.items():
                 results.append((node_name, node_output))
     except Exception as e:
@@ -53,14 +56,53 @@ def run_graph(question: str) -> list:
 
 @cl.on_chat_start
 async def on_chat_start():
-    """Called when a new chat session starts. Sends a welcome message."""
+    """Called when a new chat session starts. Shows model selector and welcome message."""
+    # Set up chat settings with model selector
+    settings = await cl.ChatSettings(
+        [
+            Select(
+                id="model",
+                label="🤖 AI Model",
+                values=list(AVAILABLE_MODELS.values()),
+                initial_value=DEFAULT_MODEL,
+            )
+        ]
+    ).send()
+
+    # Store the default model in session
+    cl.user_session.set("model_name", DEFAULT_MODEL)
+
+    # Find display name for the default model
+    display_name = next(
+        (name for name, mid in AVAILABLE_MODELS.items() if mid == DEFAULT_MODEL),
+        DEFAULT_MODEL,
+    )
+
     await cl.Message(
         content=(
             "Hi there! 👋 I'm **Mauricio Mendoza's AI**.\n\n"
             "I was built using LangGraph and RAG, and I've read all about Mauricio's background, skills, and projects.\n"
+            f"Currently using **{display_name}** model. You can change it via the ⚙️ settings icon.\n\n"
             "What would you like to know about his experience?\n\n"
             "*(I'll search my knowledge base to give you the most accurate answer!)*"
         )
+    ).send()
+
+
+@cl.on_settings_update
+async def on_settings_update(settings):
+    """Called when the user changes a setting (e.g. model selector)."""
+    model_name = settings.get("model", DEFAULT_MODEL)
+    cl.user_session.set("model_name", model_name)
+
+    # Find display name
+    display_name = next(
+        (name for name, mid in AVAILABLE_MODELS.items() if mid == model_name),
+        model_name,
+    )
+
+    await cl.Message(
+        content=f"✅ Model switched to **{display_name}**."
     ).send()
 
 
@@ -72,9 +114,10 @@ async def on_message(message: cl.Message):
     then displays intermediate steps and the final answer.
     """
     question = message.content
+    model_name = cl.user_session.get("model_name", DEFAULT_MODEL)
 
     # Run the synchronous LangGraph in a thread so it doesn't block Chainlit
-    results = await asyncio.to_thread(run_graph, question)
+    results = await asyncio.to_thread(run_graph, question, model_name)
 
     # Show each node as a "Step" in the UI
     for node_name, node_output in results:

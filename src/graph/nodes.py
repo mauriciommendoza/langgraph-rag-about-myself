@@ -8,8 +8,9 @@ from langchain_core.documents import Document
 
 from src.graph.state import GraphState
 from src.retrieval.document_indexer import get_retriever, format_docs
-from src.chains.generator import rag_chain
-from src.chains.graders import retrieval_grader
+from src.config.llm import get_llm
+from src.chains.generator import build_rag_chain
+from src.chains.graders import build_retrieval_grader
 
 def retrieve(state: GraphState) -> Dict[str, Any]:
     """
@@ -42,9 +43,14 @@ def generate(state: GraphState) -> Dict[str, Any]:
     print("  [Generate] Generating answer from context...")
     question = state["question"]
     documents = state["documents"]
+    model_name = state.get("model_name", "")
+
+    # Build chain dynamically with the selected model
+    llm_instance = get_llm(model_name) if model_name else get_llm()
+    chain = build_rag_chain(llm_instance)
 
     context = format_docs(documents)
-    generation = rag_chain.invoke({"context": context, "question": question})
+    generation = chain.invoke({"context": context, "question": question})
 
     return {
         "documents": documents,
@@ -66,11 +72,16 @@ def grade_documents(state: GraphState) -> Dict[str, Any]:
     print("  [Grader] Checking document relevance...")
     question = state["question"]
     documents = state["documents"]
+    model_name = state.get("model_name", "")
+
+    # Build grader dynamically with the selected model
+    llm_instance = get_llm(model_name) if model_name else get_llm()
+    grader = build_retrieval_grader(llm_instance)
 
     filtered_docs = []
 
     for i, d in enumerate(documents, 1):
-        score = retrieval_grader.invoke({"question": question, "document": d.page_content})
+        score = grader.invoke({"question": question, "document": d.page_content})
         grade = score.get('score', 'no')
 
         if grade.lower() == "yes":

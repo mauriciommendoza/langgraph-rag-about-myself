@@ -5,6 +5,7 @@ Orchestrates the execution of the LangGraph RAG Agent from the command line.
 
 import sys
 from src.graph.builder import app
+from src.config.llm import DEFAULT_MODEL
 
 def main():
     """Main execution block. Captures arguments and streams the agent's workflow."""
@@ -17,9 +18,10 @@ def main():
     print("=" * 60)
     print(f"  LANGGRAPH RAG AGENT")
     print(f"  Question: {question}")
+    print(f"  Model: {DEFAULT_MODEL}")
     print("=" * 60)
     
-    inputs = {"question": question}
+    inputs = {"question": question, "model_name": DEFAULT_MODEL}
     value = {}
 
     # Run the graph using the iterator form `app.stream`
